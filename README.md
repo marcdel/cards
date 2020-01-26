@@ -7,7 +7,7 @@ TODO:
 - [ ] As the user scrolls down the page, load and append additional cards using “infinite scroll.”
 - [ ] Retrieve additional pages of results as-needed but do not load more than 20 cards with each request.
 - [x] Use modern open-source web technologies to implement your solution (React, Backbone, Angular, Vue, Underscore, etc.).
-- [ ] Provide instructions for prerequisites, installation, and application setup and build in a README file.REQUIREMENTS CHECKLIST
+- [ ] Provide instructions for prerequisites, installation, and application setup and build in a README file.
 
 PUBLIC API
 - Endpoint:
