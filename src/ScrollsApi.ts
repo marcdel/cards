@@ -1,7 +1,15 @@
 import axios from "axios"
 
+export interface CardData {
+  imageUrl: string;
+  name: string;
+  text: string;
+  set: {name: string};
+  type: string;
+}
+
 export interface CardListData {
-  cards: Object[];
+  cards: CardData[];
   _links: {next: string}
   _pageSize: number
   _totalCount: number
