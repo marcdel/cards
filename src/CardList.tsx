@@ -7,6 +7,10 @@ type Props = {
   cardService: CardService
 }
 
+function cardItemKey(index: number) {
+  return `card-item-${index}`
+}
+
 export const CardList = ({cardService}: Props) => {
   const [cards, setCards] = useState<Card[]>([]);
 
@@ -19,7 +23,7 @@ export const CardList = ({cardService}: Props) => {
 
   return (
     <ul>
-      {cards.map(card => <li key={card.name}><CardDisplay card={card}/></li>)}
+      {cards.map((card, index) => <li key={cardItemKey(index)}><CardDisplay card={card}/></li>)}
     </ul>
   );
 }
