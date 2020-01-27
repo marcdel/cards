@@ -2,7 +2,7 @@ import {CardData, ScrollsApi} from "./ScrollsApi"
 import {CardService} from "./CardService"
 import {Card} from "./Card"
 
-export class ScrollsCardService implements CardService {
+export class ESLegendsCardService implements CardService {
   private scrollsApi: ScrollsApi;
 
   constructor(scrollsApi: ScrollsApi) {
