@@ -44,7 +44,7 @@ export class ScrollsCardService implements CardService {
   }
 
   private retrieveCards(page: number = 0): {cards: Card[], hasMore: boolean} {
-    const defaultValue = JSON.stringify({cards: [], hasMore: false});
+    const defaultValue = JSON.stringify({cards: [], hasMore: true});
     return JSON.parse(localStorage.getItem(this.storageKey(page)) || defaultValue);
   }
 
