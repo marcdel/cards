@@ -3,10 +3,12 @@ import './App.css'
 import {ESLegendsApi} from "./ESLegendsApi"
 import {CardList} from "./CardList"
 import {ESLegendsCardService} from "./ESLegendsCardService"
+import {LocalStorageCardCache} from "./LocalStorageCardCache"
 
 const App: React.FC = () => {
-  const scrollsApi = new ESLegendsApi()
-  const cardService = new ESLegendsCardService(scrollsApi);
+  const cardApi = new ESLegendsApi()
+  const cardCache = new LocalStorageCardCache();
+  const cardService = new ESLegendsCardService(cardApi, cardCache);
 
   return (
     <div className="App">

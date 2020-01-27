@@ -2,16 +2,19 @@ import {ESLegendsApi} from "./ESLegendsApi"
 import {CardService} from "./CardService"
 import {Card} from "./Card"
 import {CardData} from "./CardApi"
+import {CardCache} from "./CardCache"
 
 export class ESLegendsCardService implements CardService {
   private scrollsApi: ESLegendsApi;
+  private cache: CardCache
 
-  constructor(scrollsApi: ESLegendsApi) {
+  constructor(scrollsApi: ESLegendsApi, cache: CardCache) {
     this.scrollsApi = scrollsApi
+    this.cache = cache
   }
 
   async listCards(page: number): Promise<{cards: Card[], hasMore: boolean}> {
-    let {cards, hasMore} = this.retrieveCards(page);
+    let {cards, hasMore} = this.cache.retrieveCards(page);
 
     // Sleep for one second to show off the loading css
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -24,7 +27,7 @@ export class ESLegendsCardService implements CardService {
 
     hasMore = !!cardListData._links.next;
     cards = cardListData.cards.map(card => this.dataToCard(card));
-    this.storeCards(page, cards, hasMore);
+    this.cache.storeCards(page, cards, hasMore);
 
     return {cards, hasMore};
   }
@@ -39,21 +42,7 @@ export class ESLegendsCardService implements CardService {
     }
   }
 
-  private storeCards(page: number, cards: Card[], hasMore: boolean = false) {
-    const data = {cards, hasMore}
-    localStorage.setItem(this.storageKey(page), JSON.stringify(data));
-  }
-
-  private retrieveCards(page: number = 0): {cards: Card[], hasMore: boolean} {
-    const defaultValue = JSON.stringify({cards: [], hasMore: true});
-    return JSON.parse(localStorage.getItem(this.storageKey(page)) || defaultValue);
-  }
-
   private pageSize(): number {
     return 20;
-  }
-
-  private storageKey(page: number): string {
-    return `cards-page-${page}`;
   }
 }
