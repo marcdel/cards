@@ -1,5 +1,5 @@
 import {Card} from "./Card"
 
 export interface CardService {
-  listCards: () => Promise<Card[]>
+  listCards: (page: number) => Promise<{cards: Card[], hasMore: boolean}>
 }

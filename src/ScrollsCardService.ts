@@ -9,18 +9,22 @@ export class ScrollsCardService implements CardService {
     this.scrollsApi = scrollsApi
   }
 
-  async listCards(): Promise<Card[]> {
-    const storedCards = this.retrieveCards();
+  async listCards(page: number): Promise<{cards: Card[], hasMore: boolean}> {
+    let {cards, hasMore} = this.retrieveCards(page);
 
-    if(storedCards.length > 0) {
-      return storedCards;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    if(cards.length > 0 || !hasMore) {
+      return {cards, hasMore};
     }
 
-    const cardListData = await this.scrollsApi.listCards(0, 20)
-    const fetchedCards = cardListData.cards.map(card => this.dataToCard(card));
-    this.storeCards(fetchedCards);
+    const cardListData = await this.scrollsApi.listCards(page, this.pageSize())
 
-    return fetchedCards;
+    hasMore = !!cardListData._links.next;
+    cards = cardListData.cards.map(card => this.dataToCard(card));
+    this.storeCards(page, cards, hasMore);
+
+    return {cards, hasMore};
   }
 
   private dataToCard(data: CardData) {
@@ -33,11 +37,21 @@ export class ScrollsCardService implements CardService {
     }
   }
 
-  private storeCards(cards: Card[]) {
-    localStorage.setItem('cards', JSON.stringify(cards));
+  private storeCards(page: number, cards: Card[], hasMore: boolean = false) {
+    const data = {cards, hasMore}
+    localStorage.setItem(this.storageKey(page), JSON.stringify(data));
   }
 
-  private retrieveCards(): Card[] {
-    return JSON.parse(localStorage.getItem('cards') || "[]");
+  private retrieveCards(page: number = 0): {cards: Card[], hasMore: boolean} {
+    const defaultValue = JSON.stringify({cards: [], hasMore: false});
+    return JSON.parse(localStorage.getItem(this.storageKey(page)) || defaultValue);
+  }
+
+  private pageSize(): number {
+    return 20;
+  }
+
+  private storageKey(page: number): string {
+    return `cards-page-${page}`;
   }
 }

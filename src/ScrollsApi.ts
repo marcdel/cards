@@ -10,7 +10,10 @@ export interface CardData {
 
 export interface CardListData {
   cards: CardData[];
-  _links: {next: string}
+  _links: {
+    next?: string,
+    prev?: string
+  }
   _pageSize: number
   _totalCount: number
 }
