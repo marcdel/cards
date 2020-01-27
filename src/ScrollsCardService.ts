@@ -12,6 +12,7 @@ export class ScrollsCardService implements CardService {
   async listCards(page: number): Promise<{cards: Card[], hasMore: boolean}> {
     let {cards, hasMore} = this.retrieveCards(page);
 
+    // Sleep for one second to show off the loading css
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     if(cards.length > 0 || !hasMore) {
