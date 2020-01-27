@@ -1,11 +1,12 @@
-import {CardData, ScrollsApi} from "./ScrollsApi"
+import {ESLegendsApi} from "./ESLegendsApi"
 import {CardService} from "./CardService"
 import {Card} from "./Card"
+import {CardData} from "./CardApi"
 
 export class ESLegendsCardService implements CardService {
-  private scrollsApi: ScrollsApi;
+  private scrollsApi: ESLegendsApi;
 
-  constructor(scrollsApi: ScrollsApi) {
+  constructor(scrollsApi: ESLegendsApi) {
     this.scrollsApi = scrollsApi
   }
 

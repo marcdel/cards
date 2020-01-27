@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import {ScrollsApi} from "./ScrollsApi"
+import {ESLegendsApi} from "./ESLegendsApi"
 import {CardList} from "./CardList"
 import {ESLegendsCardService} from "./ESLegendsCardService"
 
 const App: React.FC = () => {
-  const scrollsApi = new ScrollsApi()
+  const scrollsApi = new ESLegendsApi()
   const cardService = new ESLegendsCardService(scrollsApi);
 
   return (
