@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(180deg, #e6eaed 0%, #54556d 100%);
@@ -11,7 +11,7 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
 ul {
@@ -38,11 +38,13 @@ figure {
   padding: 0;
   margin: 0;
 }
+
 figure img {
   display: block;
   max-width: 100%;
   height: auto;
 }
+
 figcaption {
   opacity: 0;
   position: absolute;
@@ -54,9 +56,10 @@ figcaption {
   z-index: 2;
   box-sizing: border-box;
   border-radius: 3px;
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, .7);
   transition: opacity .3s ease-in-out;
 }
+
 figure:hover figcaption {
   opacity: 1;
 }

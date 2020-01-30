@@ -6,7 +6,7 @@ type Props = {
 }
 
 function altText(card: Card) {
-  return `${card.name} card image`;
+  return `${card.name} card image`
 }
 
 export const CardDisplay = ({card}: Props) => {

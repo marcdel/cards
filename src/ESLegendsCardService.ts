@@ -4,7 +4,7 @@ import {CardApi, CardData} from "./CardApi"
 import {CardCache} from "./CardCache"
 
 export class ESLegendsCardService implements CardService {
-  private scrollsApi: CardApi;
+  private scrollsApi: CardApi
   private cache: CardCache
 
   constructor(scrollsApi: CardApi, cache: CardCache) {
@@ -12,20 +12,20 @@ export class ESLegendsCardService implements CardService {
     this.cache = cache
   }
 
-  async listCards(page: number): Promise<{cards: Card[], hasMore: boolean}> {
-    let {cards, hasMore} = this.cache.retrieveCards(page);
+  async listCards(page: number): Promise<{ cards: Card[], hasMore: boolean }> {
+    let {cards, hasMore} = this.cache.retrieveCards(page)
 
-    if(cards.length > 0 || !hasMore) {
-      return {cards, hasMore};
+    if (cards.length > 0 || !hasMore) {
+      return {cards, hasMore}
     }
 
     const cardListData = await this.scrollsApi.listCards(page, this.pageSize())
 
-    hasMore = !!cardListData._links.next;
-    cards = cardListData.cards.map(card => this.dataToCard(card));
-    this.cache.storeCards(page, cards, hasMore);
+    hasMore = !!cardListData._links.next
+    cards = cardListData.cards.map(card => this.dataToCard(card))
+    this.cache.storeCards(page, cards, hasMore)
 
-    return {cards, hasMore};
+    return {cards, hasMore}
   }
 
   private dataToCard(data: CardData) {
@@ -39,6 +39,6 @@ export class ESLegendsCardService implements CardService {
   }
 
   private pageSize(): number {
-    return 20;
+    return 20
   }
 }

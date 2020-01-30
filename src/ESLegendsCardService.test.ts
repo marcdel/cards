@@ -36,14 +36,15 @@ describe('ESLegendsCardService.listCards/1', () => {
       })
       jest.spyOn(fakeApi, 'listCards').mockImplementation(() => {
         return Promise.resolve({
-          cards: [TEST_CARD_DATA_1],
-          _links: {
-            prev: "the prev page url"
-          },
-          _pageSize: 20,
-          _totalCount: 100
-        }
-)      })
+            cards: [TEST_CARD_DATA_1],
+            _links: {
+              prev: "the prev page url"
+            },
+            _pageSize: 20,
+            _totalCount: 100
+          }
+        )
+      })
       const cardService = new ESLegendsCardService(fakeApi, fakeCache)
 
       const {cards, hasMore} = await cardService.listCards(0)
