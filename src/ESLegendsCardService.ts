@@ -1,23 +1,19 @@
-import {ESLegendsApi} from "./ESLegendsApi"
 import {CardService} from "./CardService"
 import {Card} from "./Card"
-import {CardData} from "./CardApi"
+import {CardApi, CardData} from "./CardApi"
 import {CardCache} from "./CardCache"
 
 export class ESLegendsCardService implements CardService {
-  private scrollsApi: ESLegendsApi;
+  private scrollsApi: CardApi;
   private cache: CardCache
 
-  constructor(scrollsApi: ESLegendsApi, cache: CardCache) {
+  constructor(scrollsApi: CardApi, cache: CardCache) {
     this.scrollsApi = scrollsApi
     this.cache = cache
   }
 
   async listCards(page: number): Promise<{cards: Card[], hasMore: boolean}> {
     let {cards, hasMore} = this.cache.retrieveCards(page);
-
-    // Sleep for one second to show off the loading css
-    await new Promise(resolve => setTimeout(resolve, 1000));
 
     if(cards.length > 0 || !hasMore) {
       return {cards, hasMore};
