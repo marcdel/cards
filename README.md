@@ -16,6 +16,8 @@ PUBLIC API
     - https://docs.elderscrollslegends.io/
     - https://docs.elderscrollslegends.io/#api_v1cards_list
 
+#### To test the spinner, enable Slow 3g network mode
+![Enable slow 3g network mode](sloooooow-dooooown.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
