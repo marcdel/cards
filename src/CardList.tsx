@@ -30,7 +30,7 @@ export const CardList = ({cardService}: Props) => {
       pageStart={0}
       loadMore={loadCards}
       hasMore={hasMore}
-      loader={<Loading/>}
+      loader={<Loading key={-1} />}
     >
       <ul>
         {cards.map((card, index) =>
